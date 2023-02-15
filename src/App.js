@@ -1,23 +1,50 @@
-import logo from './logo.svg';
+import * as React from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+// import required modules
+import { Navigation } from "swiper";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
 import './App.css';
+
+
+import { mock } from './data'
+
+const imageExtensions = /\.(jpg|jpeg|png|gif)$/i;
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        {mock.map(item => (
+          <SwiperSlide key={item.id}>
+            {item.file.endsWith('.pdf') ? (
+              <object style={{
+                display: 'flex', justifyContent: 'center', alignItems: 'center'
+              }}>
+                <embed src={item.file} type="text/html" height={1000} width='100%' />
+              </object>
+            ) : (
+              <img src={item.file} alt={`Slide ${item.id}`} />
+            )}
+          </SwiperSlide>
+        ))}
+
+        {/* {mock.map(item => (å
+          <SwiperSlide key={item.id}>
+            {imageExtensions.test(item.file) ? (
+              <img src={item.file} alt={`Slide ${item.id}`} />
+            ) : (
+              <object data={item.file} type="application/pdf">
+                <embed src={item.file} type="application/pdf" />
+              </object>
+            )}
+          </SwiperSlide>
+        )}} */}
+      </Swiper>
+      
     </div>
   );
 }
