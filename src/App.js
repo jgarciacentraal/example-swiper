@@ -16,7 +16,7 @@ const imageExtensions = /\.(jpg|jpeg|png|gif)$/i;
 
 function App() {
   return (
-    <div>
+    <React.Fragment>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {mock.map(item => (
           <SwiperSlide key={item.id}>
@@ -44,8 +44,8 @@ function App() {
           </SwiperSlide>
         )}} */}
       </Swiper>
-      
-    </div>
+
+    </React.Fragment>
   );
 }
 
